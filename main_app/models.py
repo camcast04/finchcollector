@@ -9,6 +9,18 @@ MEALS = (
     ('D', 'Dinner')
 )
 
+class ShinyObject(models.Model):
+  name = models.CharField(max_length=50)
+  material = models.CharField(max_length=20)
+
+  def __str__(self):
+    return self.name
+
+  def get_absolute_url(self):
+    return reverse('shiny_objects_detail', kwargs={'pk': self.id})
+
+
+
 class Finch(models.Model):
     common_name = models.CharField(max_length=100)
     species = models.CharField(max_length=100)

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Finch
+from django.views.generic import ListView, DetailView
+from .models import Finch, ShinyObject
 from .forms import FeedingForm
 
 # Create your views here.
@@ -53,3 +54,22 @@ def add_feeding(request, finch_id):
     new_feeding.finch_id = finch_id
     new_feeding.save()
   return redirect('detail', finch_id=finch_id)
+
+
+class ShinyObjectList(ListView):
+  model = ShinyObject
+
+class ShinyObjectDetail(DetailView):
+  model = ShinyObject
+
+class ShinyObjectCreate(CreateView):
+  model = ShinyObject
+  fields = '__all__'
+
+class ShinyObjectUpdate(UpdateView):
+  model = ShinyObject
+  fields = ['name', 'material']
+
+class ShinyObjectDelete(DeleteView):
+  model = ShinyObject
+  success_url = '/shiny_objects'
